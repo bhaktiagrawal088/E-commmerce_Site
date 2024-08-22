@@ -1,10 +1,12 @@
 import { useCart } from "../context/CartContext";
 import { findProductInCart } from "../utils/findProductInCart";
+import { findProductInWishlist } from "../utils/findProductInWishlist";
 import { useNavigate } from 'react-router-dom';
 
 export const ProductCard = ({ product }) => {
-  const { cart, cartDispatch } = useCart();
+  const { cart, wishlist, cartDispatch } = useCart();
   const isProductInCart = findProductInCart(cart, product.id);
+  const isProductInWishlist = findProductInWishlist(wishlist, product.id);
   const navigate = useNavigate();
 
   const onCartClick = (product) => {
@@ -14,6 +16,17 @@ export const ProductCard = ({ product }) => {
       navigate('/cart');
     }
   };
+
+  const onWishClick = (product) => {
+     if (!isProductInWishlist) {
+          cartDispatch({type: "ADD_TO_WISHLIST", payload : product});
+  }else{
+    cartDispatch({type: "REMOVE_FROM_WISHLIST", payload :{id :  product.id}})
+  }
+  };
+
+
+
 
   return (
     <div className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden w-full 
@@ -29,18 +42,23 @@ export const ProductCard = ({ product }) => {
         <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
         <div className="mb-4">
           <p className="text-gray-700 text-xl font-bold">
-            Rs. {`${product.price}0`}
+            Rs. {product.price}
           </p>
         </div>
         <div className="flex flex-col gap-2 mt-auto">
-          <button className="bg-green-800 text-white rounded-lg py-2 hover:bg-green-700 transition">
-            <span className="material-icons-outlined">favorite</span>
-            Add To Wishlist
+          <button onClick={() => onWishClick(product)}
+          className={`py-2  rounded-lg text-white ${
+          isProductInWishlist ? "bg-rose-500 hover:bg-cyan-700" : "bg-cyan-800 hover:bg-cyan-700"  
+          } transition`} >
+          <span className="material-icons-outlined">
+               {isProductInWishlist ? "favorite" : "favorite_border"}
+          </span>
+          {isProductInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
           </button>
           <button
             onClick={() => onCartClick(product)}
             className={`py-2 rounded-lg text-white ${
-              isProductInCart ? 'bg-green-800 hover:bg-green-700' : 'bg-green-800 hover:bg-green-700'
+              isProductInCart ? 'bg-black hover:bg-cyan-700' : 'bg-cyan-800 hover:bg-cyan-700'
             } transition`}
           >
             <span className="material-icons-outlined">
