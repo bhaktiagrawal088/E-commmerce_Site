@@ -11,6 +11,7 @@ export const ProductCard = ({ product }) => {
 
   const onCartClick = (product) => {
     if (!isProductInCart) {
+      localStorage.setItem('cart', JSON.stringify([...cart,product]))
       cartDispatch({ type: "ADD_TO_CART", payload: product });
     } else {
       navigate('/cart');
@@ -42,7 +43,7 @@ export const ProductCard = ({ product }) => {
         <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
         <div className="mb-4">
           <p className="text-gray-700 text-xl font-bold">
-            Rs. {product.price}
+            $ {product.price}
           </p>
         </div>
         <div className="flex flex-col gap-2 mt-auto">

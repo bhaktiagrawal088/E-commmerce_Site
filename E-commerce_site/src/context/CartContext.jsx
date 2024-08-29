@@ -4,8 +4,10 @@ import {cartReducer} from '../reducer/cartReducer'
 const CartContext = createContext()
 
 const CartProvider = ({children}) => {
+
+    console.log(JSON.parse(localStorage.getItem('cart')))
     const intialState = {
-        cart : [],
+        cart : JSON.parse(localStorage.getItem('cart')) || [],
         wishlist: [],
     }
     const [{cart, wishlist}, cartDispatch] = useReducer(cartReducer, intialState);

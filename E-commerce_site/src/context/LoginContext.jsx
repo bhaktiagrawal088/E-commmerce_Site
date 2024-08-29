@@ -7,11 +7,11 @@ const LoginProvider = ({children}) => {
     const intialState = {
         email : "",
         password : "",
-        token : ""
+        token : {access_token : localStorage.getItem('token') || "" , refrence_token: ""},
     }
-    const [{email, password}, loginDispatch] = useReducer(loginReducer, intialState);
+    const [{email, password, token}, loginDispatch] = useReducer(loginReducer, intialState);
     return (
-        <LoginContext.Provider value={{email, password, loginDispatch}}>
+        <LoginContext.Provider value={{email, password, token, loginDispatch}}>
             {children}
         </LoginContext.Provider>
     )

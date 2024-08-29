@@ -1,17 +1,27 @@
 import { useLogin } from "../context/LoginContext";
 import { userLogin } from "../API/auth";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const { loginDispatch , email, password } = useLogin();
+    const navigate = useNavigate();
 
     const onFormSubmit = async (e) => {
         e.preventDefault(); // Stop reloading the page
-        const data = useLogin(email, password)
+        const data = await userLogin(email, password)
+
+        if(Object.keys(data)?.length > 0){
+            localStorage.setItem('token', data.access_token)
+        }
 
         console.log({data})
         loginDispatch({
             type : "TOKEN", payload: {token : data}
         })
+
+        if(data.access_token){
+            navigate("/")
+        }
     };
 
     const onEmailChange = (e) => {
@@ -44,7 +54,7 @@ export const Login = () => {
                             onChange={onEmailChange} 
                             type="email" 
                             required 
-                            placeholder="Enter your email" 
+                            placeholder="john@mail.com" 
                             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
@@ -54,7 +64,7 @@ export const Login = () => {
                             onChange={onPasswordChange} 
                             type="password" 
                             required 
-                            placeholder="Enter your password" 
+                            placeholder="changeme" 
                             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>

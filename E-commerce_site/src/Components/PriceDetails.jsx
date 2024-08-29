@@ -14,16 +14,16 @@ export const PriceDetails = () => {
             <div className="flex flex-col gap-5 border-b p-2">
                 <div className="flex">
                     <p>Price ({cart.length}) items</p>
-                    <p className="ml-auto">Rs. {totalCartAmount}</p>
+                    <p className="ml-auto">$ {totalCartAmount}</p>
                 </div>
                 <div className="flex">
                     <p>Delivery Charge</p>
-                    <p className="ml-auto">Rs. {deliveryCharge}</p>
+                    <p className="ml-auto">$ {deliveryCharge}</p>
                 </div>
             </div>
             <div className="flex border-b p-2 bold">
                 <p>Total Amount</p>
-                <p className="ml-auto">Rs. {totalCartAmount + deliveryCharge}</p>
+                <p className="ml-auto">$ {totalCartAmount + deliveryCharge}</p>
             </div>
             <div className="p-2">
                 <button  className="button bg-orange-400 btn-icon cart-btn d-flex align-center justify-center

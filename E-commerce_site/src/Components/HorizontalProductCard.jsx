@@ -22,7 +22,7 @@ export const HorizontalProductCart = ({ product }) => {
             <div className="flex-grow pl-4 flex flex-col justify-between">
                 <div className="text-xl font-bold mb-2">{product.title}</div>
                 <div>
-                    <p className="text-lg font-semibold text-gray-800">Rs. {product.price}</p>
+                    <p className="text-lg font-semibold text-gray-800">${product.price}</p>
                 </div>
                 <div className="flex items-center gap-2 mb-4">
                     <p className="text-sm font-medium text-gray-600">Quantity:</p>
