@@ -22,8 +22,8 @@ export const PriceSlider = ({ min, max, onChange }) => {
         value={range}
       />
       <div className="flex justify-between mt-2">
-        <span>${range[0]}</span>
-        <span>${range[1]}</span>
+        <span></span>
+        <span></span>
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ export const ProductCard = ({ product }) => {
 
   const onWishClick = (product) => {
      if (!isProductInWishlist) {
+        localStorage.setItem('wishlist', JSON.stringify([...wishlist, product]))
           cartDispatch({type: "ADD_TO_WISHLIST", payload : product});
   }else{
     cartDispatch({type: "REMOVE_FROM_WISHLIST", payload :{id :  product.id}})

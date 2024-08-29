@@ -8,7 +8,7 @@ const CartProvider = ({children}) => {
     console.log(JSON.parse(localStorage.getItem('cart')))
     const intialState = {
         cart : JSON.parse(localStorage.getItem('cart')) || [],
-        wishlist: [],
+        wishlist: JSON.parse(localStorage.getItem('wishlist')) || [],
     }
     const [{cart, wishlist}, cartDispatch] = useReducer(cartReducer, intialState);
     return (
